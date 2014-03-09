@@ -77,7 +77,8 @@ MATH_LIB = -lm
 EXTMEMOPTS = 
 
 #LDMAP = $(LDFLAGS) -Wl,-Map=$(TARGET).map,--cref
-LDFLAGS = $(EXTMEMOPTS) $(LDMAP) $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB)
+#LDFLAGS = $(EXTMEMOPTS) $(LDMAP) $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB)
+LDFLAGS = $(EXTMEMOPTS) $(LDMAP) $(MATH_LIB)
 
 
 # Programming support using avrdude. Settings and variables.
@@ -223,3 +224,31 @@ depend:
 .PHONY:	all build elf hex eep lss sym program coff extcoff clean depend
 
 
+# DO NOT DELETE THIS LINE -- make depend depends on it.
+main.o: main.c common.h /usr/lib/gcc/avr/4.7.3/include/stdint.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/stdint.h audio.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/avr/io.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/avr/sfr_defs.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/inttypes.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/avr/iom328p.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/avr/portpins.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/avr/common.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/avr/version.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/avr/fuse.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/avr/lock.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/util/delay.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/util/delay_basic.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/math.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/avr/interrupt.h
+audio.o: audio.c common.h /usr/lib/gcc/avr/4.7.3/include/stdint.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/stdint.h audio.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/avr/io.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/avr/sfr_defs.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/inttypes.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/avr/iom328p.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/avr/portpins.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/avr/common.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/avr/version.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/avr/fuse.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/avr/lock.h \
+ /usr/lib/gcc/avr/4.7.3/../../../../avr/include/avr/interrupt.h

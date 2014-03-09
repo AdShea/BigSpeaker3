@@ -31,6 +31,7 @@ int main(void) {
     setupADC();
     setupPWM();
 
+    DDRD |= 1<<6;
     enableHighSwitches();
     sei();
     while(42) {

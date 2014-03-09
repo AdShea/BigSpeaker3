@@ -53,19 +53,44 @@ void enableHighSwitches(void) {
     PORTB |= 0x01;
 }
 
+#define abs(x) (((x)<0) ? -(x) : (x))
+
 ISR(ADC_vect) {
     int16_t half;
     int16_t input;
 
+    if((ADMUX & 0x07) == 1) {
+	input = (int16_t)(ADC) - (1<<9);
+
+	PORTD ^= 1<<6;
+	/* If the current is too high in either polarity then set 50% duty
+	 * ratio */
+	if (abs(input) > CURRENT_LIMIT) {
+	    OCR1A = PWM_TOP/2;
+	    OCR1B = PWM_TOP/2;
+	    //PORTD |= 1<<6;
+	    PORTB |= 1<<5;
+	} else {
+	    //PORTD &= ~(1<<6);
+	}
+
+	/* Next auto-triggered conversion is an audio sample */
+	ADMUX = 0x40;
+    } else {
     /* Process the ADC value and put it into the PWM output. This function
-     * implements 1.25 gain right now, uses offset PWM. */
+     * implements 2x gain right now, uses offset PWM. */
     input = (int16_t)(ADC) - (1<<9);
     half = input;
     input += input;
     
     OCR1A = PWM_TOP/2 + half;
     OCR1B = PWM_TOP/2 + half - input;
-    
+
+    /* Trigger another conversion to measure the current */
+    ADMUX = 0x41;
+    ADCSRA |= _BV(ADSC);
+    }
+
     ADCSRA |= _BV(ADIF);
     
 }
